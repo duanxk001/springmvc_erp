@@ -18,8 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#nameInput").blur(function(){
 			//$("#context").text("xixi");
 			$.post("check.do",function(data){
-				$("#context").text(data.name);
-			},"json");
+				$("context").text(data);
+			});
 		});
 	});
 </script>

@@ -13,6 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
-<h2>成功页面！</h2>
+<h2><%=request.getAttribute("name") %>成功页面！</h2>
 </body>
 </html>
