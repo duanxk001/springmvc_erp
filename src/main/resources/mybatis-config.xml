@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- <typeAliases>
+		<typeAlias type="com.h57.sample.domain.Identity" alias="Identity" />
+		<typeAlias type="com.h57.sample.form.RegistrationForm"
+			alias="RegistrationForm" />
+	</typeAliases> -->
+
+	<typeAliases>
+		<typeAlias type="com.zx.model.MenuModel" alias="MenuModel"/>
+		<typeAlias type="com.zx.model.ParameterModel" alias="ParameterModel"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/zx/mybatis/mappers/MenuMapper.xml" />
+	</mappers>
+</configuration>

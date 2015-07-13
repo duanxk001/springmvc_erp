@@ -12,9 +12,9 @@
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
       <!-- 启用spring mvc 注解 -->
       
-   <!--  <context:property-placeholder location="classpath:config.properties" /> -->
+    <context:property-placeholder location="classpath:application.properties" />
     <context:annotation-config />
-    
+    <mvc:annotation-driven />
     <!-- 设置使用注解的类所在的jar包 -->
     <context:component-scan base-package="com.zx"></context:component-scan>
     
@@ -22,5 +22,38 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/jsp/"
           p:suffix=".jsp" />
-   <!--  <mvc:annotation-driven /> -->
+          
+    <!-- define the SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<!-- <property name="typeAliasesPackage" value="com.h57.sample.domain" />
+		<property name="configLocation"
+			value="classpath:com/h57/sample/persistence/mybatis-config.xml" /> -->
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+		<constructor-arg index="1" value="BATCH" /><!--- 如果想要进行批量操作可加入这个属性 -->
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	     <property name="basePackage" value="com.zx.mybatis.inter" />     
+	  </bean>
+	
+          
+	<!-- Get the Datasource -->
+	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.pass}" />
+	</bean>
+	
+	<!-- Security Configuration / Apache Shiro -->
+	<import resource="shiro-context.xml" />
+	
+	
 </beans>  
